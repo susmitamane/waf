@@ -1,4 +1,4 @@
-name: System.Waf.CI
+name: System.Waf.CI.
 on: 
   push:
     paths: 
