@@ -13,7 +13,7 @@ jobs:
     uses: ./.github/workflows/GetBuildVersion.yml
 
   Android:
-    runs-on: windows-2022
+    runs-on: macos-latest
     needs: GetVersion
     steps:
     - uses: actions/checkout@v4
