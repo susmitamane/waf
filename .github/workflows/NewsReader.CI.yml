@@ -1,4 +1,5 @@
 
+
 name: NewsReader.CI
 
 on: 
@@ -58,7 +59,7 @@ jobs:
           sudo xcode-select -s $XCODE_ROOT
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.70'
+          dotnet-version: '8.0.x'
       - name: Install .NET MAUI
         run: |
           dotnet workload install maui ios
@@ -66,6 +67,7 @@ jobs:
         run: |
           cd src/NewsReader/NewsReader.MauiSystem
           dotnet build -f net8.0-ios -c:Release /p:packageApp=false /p:buildForSimulator=true /p:ArchiveOnBuild=false -p:ApplicationVersion=${{ needs.GetVersion.outputs.version }} -p:ApplicationDisplayVersion=${{ needs.GetVersion.outputs.version }}
+        
   Test:
     runs-on: windows-2022
     needs: GetVersion
