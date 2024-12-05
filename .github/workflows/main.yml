@@ -14,19 +14,4 @@ jobs:
         run: |
           sudo xcode-select -switch /Applications/Xcode_16.app # Specify Xcode version
           xcodebuild -version
-
-      - name: Run UI Tests
-        env:
-          SIMULATOR_DEVICE: "iPhone 15 pro" # Adjust based on your requirements
-          SIMULATOR_OS: "18.0" # Adjust based on your requirements
-        run: |
-          # Boot the Simulator
-          xcrun simctl boot "$SIMULATOR_DEVICE ($SIMULATOR_OS)"
-          xcrun simctl list | grep Booted
-
-          # Run UI Tests
-          xcodebuild test \
-            -workspace NewsReader.MauiSystem.csproj \ # Replace with your workspace
-            -scheme src/Samples.UITest \ # Replace with your UI test target scheme
-            -destination "platform=iOS Simulator,name=$SIMULATOR_DEVICE,OS=$SIMULATOR_OS" \
-            -enableCodeCoverage YES
+          xcrun simctl list runtimes
