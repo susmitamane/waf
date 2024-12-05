@@ -18,7 +18,7 @@ jobs:
       - name: Run UI Tests
         env:
           SIMULATOR_DEVICE: "iPhone 15 Pro" # Adjust based on your requirements
-          SIMULATOR_OS: "18.0" # Adjust based on your requirements
+          SIMULATOR_OS: "latest" # Adjust based on your requirements
         run: |
           # Boot the Simulator
           xcrun simctl boot "$SIMULATOR_DEVICE ($SIMULATOR_OS)"
