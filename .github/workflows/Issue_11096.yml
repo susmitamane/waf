@@ -1,0 +1,30 @@
+name: Run Issue 11096
+
+on:
+  [ workflow_dispatch ]
+
+jobs:
+  build:
+    name: Build and Upload app on TestFlight
+    runs-on: macos-15-xlarge
+
+    steps:
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_16.app/Contents/Developer'
+
+      - name: Select Swift version
+        uses: swift-actions/setup-swift@65540b95f51493d65f5e59e97dcef9629ddf11bf
+        with:
+          swift-version: "5.8"
+
+      - name: Install bundler
+        run: gem install bundler -v 2.5.16
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
