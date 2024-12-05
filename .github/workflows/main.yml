@@ -1,0 +1,35 @@
+name: Run UI Tests on iOS Simulator
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  ui-tests:
+    runs-on: macos-12 # Adjust macOS version to match your needs
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Xcode Tools
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_16.app # Specify Xcode version
+          xcodebuild -version
+
+      - name: Run UI Tests
+        env:
+          SIMULATOR_DEVICE: "iPhone 14" # Adjust based on your requirements
+          SIMULATOR_OS: "16.0" # Adjust based on your requirements
+        run: |
+          # Boot the Simulator
+          xcrun simctl boot "$SIMULATOR_DEVICE ($SIMULATOR_OS)"
+          xcrun simctl list | grep Booted
+
+          # Run UI Tests
+          xcodebuild test \
+            -workspace NewsReader.MauiSystem.csproj \ # Replace with your workspace
+            -scheme src/Samples.UITest \ # Replace with your UI test target scheme
+            -destination "platform=iOS Simulator,name=$SIMULATOR_DEVICE,OS=$SIMULATOR_OS" \
+            -enableCodeCoverage YES
