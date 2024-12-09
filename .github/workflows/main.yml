@@ -5,7 +5,7 @@ on:
 
 jobs:
   ui-tests:
-    runs-on: macos-14 # Adjust macOS version to match your needs
+    runs-on: macos-14-large # Adjust macOS version to match your needs
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -17,8 +17,8 @@ jobs:
           xcrun simctl list runtimes
       - name: Run UI Tests
         env:
-          SIMULATOR_DEVICE: "iPhone 15 Pro" # Adjust based on your requirements
-          SIMULATOR_OS: "iOS 17.0" # Adjust based on your requirements
+          SIMULATOR_DEVICE: "iPhone 15" # Adjust based on your requirements
+          SIMULATOR_OS: "iOS 18.0" # Adjust based on your requirements
         run: |
           # Boot the Simulator
           xcrun simctl boot "$SIMULATOR_DEVICE ($SIMULATOR_OS)"
